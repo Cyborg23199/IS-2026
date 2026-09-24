@@ -1,5 +1,6 @@
 import socket
 import sys
+import random
 
 # Get port from command line arguments or use 9999 as default
 if len(sys.argv) > 1:
@@ -17,5 +18,12 @@ print(f"UDP server listening on port {port}...")
 # Infinite loop to receive and display datagrams
 while True:
     data, client_address = s.recvfrom(2048)
+    message = data.decode("utf-8")
+
+    rand_int = random.randint(0, 1)
+    if rand_int == 0:
+        print(f"Packet lost")
+        continue
+    
     message = data.decode("utf-8")
     print(f"Received from {client_address}: {message}")
