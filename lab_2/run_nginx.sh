@@ -9,9 +9,12 @@ docker run --rm -d \
   --name nginx \
   -p 80:80 \
   -p 81:81 \
+  -v "$(pwd)/configuracion_nginx/nginx.conf:/etc/nginx/nginx.conf" \
   -v "$(pwd)/html:/usr/share/nginx/html" \
   -v "$(pwd)/html2:/usr/share/nginx/html2" \
   -v "$(pwd)/sitios_nginx:/etc/nginx/conf.d" \
   nginx
+  
 
 echo "Nginx container launched successfully."
+
