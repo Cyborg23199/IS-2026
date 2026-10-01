@@ -17,4 +17,3 @@ docker run --rm -d \
   
 
 echo "Nginx container launched successfully."
-
