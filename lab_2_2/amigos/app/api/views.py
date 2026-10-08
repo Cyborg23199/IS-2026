@@ -17,3 +17,20 @@ def get_amigo(id):
         'longi': amigo.longi
     }
     return jsonify(amigodict)
+
+@api.route("/amigo/byName/<name>")
+def get_amigo_by_name(name):
+    """
+    Busca el amigo por su nombre en la base de datos. Si no lo encuentra
+    retorna un error 404. Si lo encuentra retorna el JSON con sus datos
+    """
+    amigo = Amigo.query.filter_by(name=name).first()
+    if not amigo:
+        abort(404, "No se encuentra ningún amigo con ese nombre")
+    amigodict = {
+        'id': amigo.id,
+        'name': amigo.name,
+        'lati': amigo.lati,
+        'longi': amigo.longi
+    }
+    return jsonify(amigodict)
