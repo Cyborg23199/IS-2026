@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import app_config
@@ -20,12 +20,10 @@ def create_app(config_name):
     db.init_app(app)
     
     migrate = Migrate(app, db)
-    from app import models
-    # Register temporary test route
-    @app.route('/amigos')
-    def hola_mundo():
-        from app.models import Amigo
-        amigos = Amigo.query.all()
-        return render_template('tabla_amigos.html', amigos=amigos)
+
+    
+    # Register blueprint and mount under /html prefix
+    from .html import html as html_blueprint
+    app.register_blueprint(html_blueprint, url_prefix='/html')
 
     return app
