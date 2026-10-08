@@ -93,3 +93,13 @@ def edit_amigo(id):
         "lati": amigo.lati
     }
     return jsonify(amigodict)
+
+@api.route("/amigo/<int:id>", methods=["DELETE"])
+def delete_amigo(id):
+    """
+    Elimina un amigo cuyo id recibe como parámetro de la base de datos.
+    """
+    amigo = Amigo.query.get_or_404(id)
+    db.session.delete(amigo)
+    db.session.commit()
+    return ('', 204)
