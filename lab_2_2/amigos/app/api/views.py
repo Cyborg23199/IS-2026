@@ -52,3 +52,44 @@ def list_amigos():
         }
         lista_amigos.append(amigodict)
     return jsonify(lista_amigos)
+
+@api.route("/amigo/<int:id>", methods=["PUT"])
+def edit_amigo(id):
+    """
+    Modifica en la base de datos el amigo cuyo id recibe como parámetro.
+    Retorna el JSON con el amigo tras la modificación
+    """
+    # Obtenemos el amigo a partir de su ID
+    amigo = Amigo.query.get_or_404(id)
+
+    # Comprobamos que hemos recibido JSON como parte del PUT
+    if not request.json:
+        abort(422, "No se ha enviado JSON")
+
+    # Intentamos extraer campos del JSON (si no están presentes
+    # la extracción retornará None)
+    name = request.json.get("name")
+    lati = request.json.get("lati")
+    longi = request.json.get("longi")
+
+    # Usamos los campos que estén presentes para actualizar el objeto amigo
+    if name:
+        amigo.name = name
+    if lati:
+        amigo.lati = lati
+    if longi:
+        amigo.longi = longi
+
+    # Finalmente, si hemos cambiado algo en el objeto amigo, hacemos
+    # el commit a la base de datos para que se guarden las modificaciones
+    if name or lati or longi:
+        db.session.commit()
+
+    # Y retornamos el JSON con los nuevos datos
+    amigodict = {
+        "id": amigo.id,
+        "name": amigo.name,
+        "longi": amigo.longi,
+        "lati": amigo.lati
+    }
+    return jsonify(amigodict)
