@@ -103,3 +103,45 @@ def delete_amigo(id):
     db.session.delete(amigo)
     db.session.commit()
     return ('', 204)
+
+@api.route("/amigos", methods=["POST"])
+def new_amigo():
+    """
+    Modifica en la base de datos añadiendo un amigo cuyos datos
+    recibe en JSON.
+    Retorna el JSON con el amigo tras la creación, para que el cliente
+    pueda conocer el id del amigo recién creado.
+    """
+    # Comprobamos que hemos recibido JSON como parte de la petición
+    if not request.json:
+        abort(422, "No se ha enviado JSON")
+
+    # Intentamos extraer campos del JSON (si no están presentes la extracción retornará None)
+    name = request.json.get("name")
+
+    # Si no hay nombre, rechazamos la petición
+    if not name:
+        abort(422, "El JSON no incluye el campo name")
+
+    # Si el nombre ya existe en la base de datos, también lo rechazamos
+    amigo = Amigo.query.filter_by(name=name).first()
+    if amigo:
+        abort(422, "Ya existe un amigo con ese nombre")
+
+    # En caso contrario, tomamos latitud y longitud. Si no vienen les damos un valor de 0
+    lati = request.json.get("lati", "0")
+    longi = request.json.get("longi", "0")
+
+    # Creamos un nuevo amigo con esos datos
+    amigo = Amigo(name=name, lati=lati, longi=longi)
+    db.session.add(amigo)
+    db.session.commit()
+
+    # Y retornamos el JSON con los datos del nuevo amigo
+    amigodict = {
+        "id": amigo.id,
+        "name": amigo.name,
+        "longi": amigo.longi,
+        "lati": amigo.lati
+    }
+    return jsonify(amigodict)
