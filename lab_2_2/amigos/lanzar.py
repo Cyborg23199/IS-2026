@@ -1,4 +1,7 @@
+# Importar la función create_app desde la carpeta app
 from app import create_app
+import os
 
-# Instantiate the application with the development configuration
-app = create_app("development")
+# Usarlo para instanciar la aplicacion
+modo = os.getenv("DEPLOYMENT_MODE", "production")
+app = create_app(modo)
