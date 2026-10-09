@@ -48,6 +48,7 @@ def new_amigo():
 @html.route("/save_amigo", methods=["POST"])
 def save_amigo():
     id = request.form.get("id")
+    device = request.form.get("device", "")
     if id is None or id == "":
         # Creación de un nuevo amigo
         name = request.form.get("name")
@@ -56,7 +57,7 @@ def save_amigo():
         lati = request.form.get("lati", "0")
         longi = request.form.get("longi", "0")
 
-        amigo = Amigo(name=name, lati=lati, longi=longi)
+        amigo = Amigo(name=name, lati=lati, longi=longi, device=device)
         db.session.add(amigo)
         db.session.commit()
     else:
@@ -68,9 +69,11 @@ def save_amigo():
         lati = request.form.get("lati")
         if lati:
             amigo.lati = lati
-        longi = request.form.get("longi", "0")
+        longi = request.form.get("longi")
         if longi:
             amigo.longi = longi
+
+        amigo.device = device
 
         db.session.commit()
 

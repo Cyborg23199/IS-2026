@@ -25,6 +25,7 @@
       <th>Nombre</th>
       <th>Latitud</th>
       <th>Longitud</th>
+      <th>Device</th>
       <th></th>
       <th></th>
     </tr>
@@ -34,6 +35,7 @@
       <td>{{amigo.name}}</td>
       <td>{{amigo.lati}}</td>
       <td>{{amigo.longi}}</td>
+      <td>{{amigo.device or ''}}</td>
       <td><a href="/html/edit_amigo/{{amigo.id}}">Modificar</a></td>
       <td><a href="/html/delete_amigo/{{amigo.id}}">Borrar</a></td>
     </tr>
