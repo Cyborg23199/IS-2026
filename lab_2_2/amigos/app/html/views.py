@@ -54,8 +54,8 @@ def save_amigo():
         name = request.form.get("name")
         if not name:
             abort(422)  # HTTP 422 Unprocessable Entity
-        lati = request.form.get("lati", "0")
-        longi = request.form.get("longi", "0")
+        lati = request.form.get("lati") or "0"
+        longi = request.form.get("longi") or "0"
 
         amigo = Amigo(name=name, lati=lati, longi=longi, device=device)
         db.session.add(amigo)

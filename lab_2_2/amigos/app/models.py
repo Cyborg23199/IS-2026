@@ -9,8 +9,8 @@ class Amigo(db.Model):
     # Lo siguiente define las columnas de la base de datos y sus tipos
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), unique=True)
-    longi = db.Column(db.String(32))
-    lati = db.Column(db.String(32))
+    longi = db.Column(db.String(32), default=0.0)
+    lati = db.Column(db.String(32), default=0.0)
     device = db.Column(db.Text(), nullable=True)
 
     # Podemos escribir la función siguiente para implementar cómo debe
