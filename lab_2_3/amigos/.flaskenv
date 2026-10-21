@@ -1,0 +1,2 @@
+FLASK_APP=lanzar.py
+FLASK_DEBUG=1
