@@ -1,0 +1,6 @@
+flask 
+gunicorn
+flask-sqlalchemy 
+pymysql 
+flask-migrate
+prometheus-client
