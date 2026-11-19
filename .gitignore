@@ -1,5 +1,5 @@
 basedatos/
 __pycache__/
-html/video5/*.mp4
-html/video5/big_buck_bunny.ogv
-html/video5/big_buck_bunny.webm
+lab_5/html/video5/*.mp4
+lab_5/html/video5/*.ogv
+lab_5/html/video5/*.webm
