@@ -7,16 +7,13 @@ PASSWORD = "Zaq12wsx"
 
 tn = telnetlib.Telnet(HOST)
 
-# Logowanie
 tn.read_until(b"login: ")
 tn.write(USER.encode('utf-8') + b"\n")
 tn.read_until(b"Password: ")
 tn.write(PASSWORD.encode('utf-8') + b"\n")
 
-# Czekamy na gotowość powłoki
 tn.read_until(b"$")
 
-# Sprawdzamy procesy
 tn.write(b"ps -ef\n")
 respuesta_ps = tn.read_until(b"$").decode('utf-8')
 
