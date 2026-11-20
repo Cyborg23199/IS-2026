@@ -3,3 +3,4 @@ __pycache__/
 lab_5/html/video5/*.mp4
 lab_5/html/video5/*.ogv
 lab_5/html/video5/*.webm
+lab_5/wowza/content/*.mp4

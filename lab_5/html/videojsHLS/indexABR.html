@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HLS with ABR with Video.js</title>
+  <link href="https://vjs.zencdn.net/7.21.5/video-js.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/videojs-hls-quality-selector@1.1.4/dist/videojs-hls-quality-selector.css" rel="stylesheet">
+</head>
+
+<body>
+  <h1>HLS with ABR with Video.js</h1>
+  <video id="my-video" class="video-js" controls
+      preload="auto" width="640" height="264">
+    <source src="http://192.168.1.132:1935/abr/smil:conejo.smil/playlist.m3u8" type="application/x-mpegURL">
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that supports HTML5 video.
+    </p>
+  </video>
+
+  <script src="https://vjs.zencdn.net/7.21.5/video.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-quality-levels@2.1.0/dist/videojs-contrib-quality-levels.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-hls-quality-selector@1.1.4/dist/videojs-hls-quality-selector.min.js"></script>
+  <script>
+    var player = videojs('my-video', {
+      html5: {
+        vhs: {
+          overrideNative: true
+        }
+      }
+    });
+    player.hlsQualitySelector({
+      displayCurrentQuality: true
+    });
+  </script>
+</body>
+</html>
