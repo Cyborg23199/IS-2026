@@ -189,7 +189,7 @@ certificates = "certs"
 -- You need to add a VirtualHost entry for each domain you wish Prosody to serve.
 -- Settings under each VirtualHost entry apply *only* to that host.
 
-VirtualHost "localhost"
+VirtualHost "ingserv222"
 
 --VirtualHost "example.com"
 --	certificate = "/path/to/example.crt"
