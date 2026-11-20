@@ -1,6 +1,0 @@
-return {
-	["iteration_count"] = 4096;
-	["stored_key"] = "ef5553f0655dc76fc43984080b0190607e4d95ae";
-	["salt"] = "b591815e-62fd-4208-b448-2aa43dfc469a";
-	["server_key"] = "dd74241a3ff9899c9197da95a000907e09b9cf92";
-};
